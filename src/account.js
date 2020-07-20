@@ -92,7 +92,7 @@ const recover = (hash, signature) => {
   const vals = decodeSignature(signature);
   const vrs = {v: Bytes.toNumber(vals[0]), r:vals[1].slice(2), s:vals[2].slice(2)};
   const ecPublicKey = secp256k1.recoverPubKey(new Buffer(hash.slice(2), "hex"), vrs, vrs.v < 2 ? vrs.v : 1 - (vrs.v % 2)); // because odd vals mean v=0... sadly that means v=0 means v=1... I hate that
-  const hash160 = Crypto.hash160(Buffer.from(pubKey, "hex"));
+  const hash160 = Crypto.hash160(Buffer.from(ecPublicKey.encode("hex", false).slice(2), "hex"));
   var address = toBase58Check(hash160, Version);
   address = INTAddrPrefix + address.substr(0, 29);
   return address;

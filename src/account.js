@@ -42,6 +42,23 @@ const isValidAddress = address => {
   return true
 }
 
+const stringToHex = (str) => {
+  var val = "0x";
+  for (var i = 0; i < str.length; i++) {
+    if (val == "") { val = str.charCodeAt(i).toString(16); } else { val += str.charCodeAt(i).toString(16); }
+  }
+  return val;
+}
+
+const hexToString = (str) => {
+  let s = str.indexOf("0x") == 0 ? str.slice(2) : str;
+  let val = '';
+  for(let i = 0; i < s.length; i += 2) {
+    val += String.fromCharCode(+parseInt(s.slice(i, 2), 16).toString(10))
+  }
+  return val;
+}
+
 const toBase58Check = (hash, version) => {
   // typeforce(types.tuple(types.Hash160bit, types.UInt8), arguments);
 
@@ -86,6 +103,8 @@ module.exports = {
   fromPrivate,
   isValidAddress,
   sign,
+  stringToHex,
+  hexToString,
   makeSigner,
   recover,
   encodeSignature,

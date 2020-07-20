@@ -9,6 +9,7 @@ const Buffer = require('safe-buffer').Buffer;
 
 
 const Version = 0x05;
+const INTAddrPrefix = "INT";
 const create = entropy => {
   const innerHex = keccak256(Bytes.concat(Bytes.random(32), entropy || Bytes.random(32)));
   const middleHex = Bytes.concat(Bytes.concat(Bytes.random(32), innerHex), Bytes.random(32));
@@ -23,14 +24,14 @@ const fromPrivate = privateKey => {
   // NOTE: hash160 params is buffer
   const hash160 = Crypto.hash160(Buffer.from(pubKey, "hex"));
   var address = toBase58Check(hash160, Version);
-  address = "INT" + address.substr(0, 29);
+  address = INTAddrPrefix + address.substr(0, 29);
   return {
     address: address,
     privateKey: privateKey
   }
 }
 
-const isAddress = address => {
+const isValidAddress = address => {
   if (typeof address !== "string") {
     return false
   }else if (address.length !== 32) {
@@ -76,14 +77,14 @@ const recover = (hash, signature) => {
   const ecPublicKey = secp256k1.recoverPubKey(new Buffer(hash.slice(2), "hex"), vrs, vrs.v < 2 ? vrs.v : 1 - (vrs.v % 2)); // because odd vals mean v=0... sadly that means v=0 means v=1... I hate that
   const hash160 = Crypto.hash160(Buffer.from(pubKey, "hex"));
   var address = toBase58Check(hash160, Version);
-  address = "INT" + address.substr(0, 29);
+  address = INTAddrPrefix + address.substr(0, 29);
   return address;
 }
 
 module.exports = {
   create,
   fromPrivate,
-  isAddress,
+  isValidAddress,
   sign,
   makeSigner,
   recover,

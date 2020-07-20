@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/intfoundation/intjs4.0.git"
+    "url": "git+https://github.com/intfoundation/int4.js.git"
   },
   "keywords": [
     "INT",
@@ -20,9 +20,9 @@
   "author": "likeaixi@gmail.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/intfoundation/intjs4.0/issues"
+    "url": "https://github.com/intfoundation/int4.js/issues"
   },
-  "homepage": "https://github.com/intfoundation/intjs4.0#readme",
+  "homepage": "https://github.com/intfoundation/int4.js#readme",
   "dependencies": {
     "bn.js": "^5.1.2",
     "browserify-cipher": "^1.0.1",

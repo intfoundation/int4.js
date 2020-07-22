@@ -240,7 +240,7 @@ SOFTWARE.
 [coveralls-url]: https://img.shields.io/coveralls/github/intfoundation/int4.js
 
 [license-image]: https://img.shields.io/github/license/intfoundation/int4.js
-[license-url]: https://github.com/intfoundation/int4.js/lincese
+[license-url]: https://github.com/intfoundation/int4.js/blob/master/LICENSE
 
 [language-image]: https://img.shields.io/github/languages/top/intfoundation/int4.js?color=yellow
 

@@ -206,4 +206,4 @@ SOFTWARE.
 
 [language-url]: https://img.shields.io/github/languages/top/intfoundation/int4.js
 
-[size-url]: https://img.shields.io/github/repo-size/intfoundation/int4.js
+[size-url]: https://img.shields.io/github/repo-size/intfoundation/int4.js?color=light

@@ -192,7 +192,7 @@ SOFTWARE.
 ```
 
 [npm-image-version]: https://img.shields.io/npm/v/int4.js.svg
-[npm-image-downloads]: https://img.shields.io/npm/dm/int4.js.svg
+[npm-image-downloads]: https://img.shields.io/npm/dm/int4.js.svg?color=pink
 [npm-url]: https://npmjs.org/package/int4.js
 
 [actions-image]: https://github.com/intfoundation/int4.js/workflows/Build/badge.svg
@@ -204,6 +204,6 @@ SOFTWARE.
 [license-image]: https://img.shields.io/github/license/intfoundation/int4.js
 [license-url]: https://npmjs.org/package/int4.js/lincese
 
-[language-url]: https://img.shields.io/github/languages/top/intfoundation/int4.js
+[language-url]: https://img.shields.io/github/languages/top/intfoundation/int4.js?color=yellow
 
 [size-url]: https://img.shields.io/github/repo-size/intfoundation/int4.js?color=light

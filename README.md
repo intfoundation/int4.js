@@ -1,5 +1,5 @@
 # int4.js - INT Chain 4.0 JavaScript API
-[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url]
+[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url] ![GitHub top language][language-url] ![Size][size-url]
 
 ## Installation
 
@@ -203,3 +203,7 @@ SOFTWARE.
 
 [license-image]: https://img.shields.io/github/license/intfoundation/int4.js
 [license-url]: https://npmjs.org/package/int4.js/lincese
+
+[language-url]: https://img.shields.io/github/languages/top/intfoundation/int4.js
+
+[size-url]: https://img.shields.io/github/repo-size/intfoundation/int4.js

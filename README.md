@@ -1,5 +1,5 @@
 # int4.js - INT Chain 4.0 JavaScript API
-[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url] ![GitHub top language][language-url] ![Size][size-url] ![build][build-url]
+[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url] ![GitHub top language][language-url] ![Size][size-url] ![Nodejs Package][package-url]
 
 ## Installation
 
@@ -246,4 +246,4 @@ SOFTWARE.
 
 [size-url]: https://img.shields.io/github/repo-size/intfoundation/int4.js?color=light
 
-[build-url]: https://github.com/intfoundation/int4.js/workflows/build/badge.svg
+[package-url]: https://github.com/intfoundation/int4.js/workflows/nodejs%20package/badge.svg

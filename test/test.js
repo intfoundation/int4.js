@@ -68,6 +68,7 @@ describe("Keystore", () => {
    describe("#toV3Keystore", () => {
        it("Must generate v3 keystore", () => {
            let v3Keystore = Keystore.toV3Keystore(keystore.privateKey, keystore.password, {});
+           console.log(Keystore.toV3Keystore(keystore.privateKey, keystore.password, {}));
            Assert(v3Keystore.version === 3);
        })
    });

@@ -85,6 +85,29 @@ console.log(account)
   privateKey: '0x353d3eab4643ab04972eaa80e4b3383266fea8cfd743605c62dd0fb07768ba7a' 
 }
 
+// Create Keystore
+let v3Keystore = Keystore.toV3Keystore(keystore.privateKey, keystore.password, {});
+console.log(v3Keystore);
+
+{ version: 3,
+  id: 'b596552f-ccd6-442c-9411-097f392a8796',
+  address: 'INT3CTuDn49ET2dgMWBRauQMnnQECZy9',
+  crypto:
+   { ciphertext:
+      '9787b80d9eb516b6281dc3d5d108d24aadc21a85db8f4ea8fa7df1fd92d83122',
+     cipherparams: { iv: '4ae4cd88acbe22769421744b220c3909' },
+     cipher: 'aes-128-ctr',
+     kdf: 'scrypt',
+     kdfparams:
+      { dklen: 32,
+        salt:
+         'a5e79e8ed19a6bc742c56e0aded85f81e924f46a33c4c03dd848d6ceed2a9091',
+        n: 8192,
+        r: 8,
+        p: 1 },
+     mac:
+      '09d9bd8bbb990892c38b006e71faa27a3d6f3a3c02371555f0b9b39c78b091a2' } }
+
 // Recover Account
 
 const keystore = {

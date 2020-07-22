@@ -37,7 +37,6 @@ console.log(int4);
 }
 
 
-
 const Account = int4.account;
 const RPC = int4.rpc;
 const Nat = int4.nat;

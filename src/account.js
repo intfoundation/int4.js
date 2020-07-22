@@ -42,23 +42,6 @@ const isValidAddress = address => {
   return true
 }
 
-const stringToHex = (str) => {
-  var val = "0x";
-  for (var i = 0; i < str.length; i++) {
-    if (val == "") { val = str.charCodeAt(i).toString(16); } else { val += str.charCodeAt(i).toString(16); }
-  }
-  return val;
-}
-
-const hexToString = (str) => {
-  let s = str.indexOf("0x") == 0 ? str.slice(2) : str;
-  let val = '';
-  for(let i = 0; i < s.length; i += 2) {
-    val += String.fromCharCode(+parseInt(s.slice(i, 2), 16).toString(10))
-  }
-  return val;
-}
-
 const toBase58Check = (hash, version) => {
   // typeforce(types.tuple(types.Hash160bit, types.UInt8), arguments);
 
@@ -91,7 +74,7 @@ const sign = makeSigner(27); // v=27|28 instead of 0|1...
 const recover = (hash, signature) => {
   const vals = decodeSignature(signature);
   const vrs = {v: Bytes.toNumber(vals[0]), r:vals[1].slice(2), s:vals[2].slice(2)};
-  const ecPublicKey = secp256k1.recoverPubKey(new Buffer(hash.slice(2), "hex"), vrs, vrs.v < 2 ? vrs.v : 1 - (vrs.v % 2)); // because odd vals mean v=0... sadly that means v=0 means v=1... I hate that
+  const ecPublicKey = secp256k1.recoverPubKey(Buffer.from(hash.slice(2), "hex"), vrs, vrs.v < 2 ? vrs.v : 1 - (vrs.v % 2)); // because odd vals mean v=0... sadly that means v=0 means v=1... I hate that
   const hash160 = Crypto.hash160(Buffer.from(ecPublicKey.encode("hex", false).slice(2), "hex"));
   var address = toBase58Check(hash160, Version);
   address = INTAddrPrefix + address.substr(0, 29);
@@ -103,8 +86,6 @@ module.exports = {
   fromPrivate,
   isValidAddress,
   sign,
-  stringToHex,
-  hexToString,
   makeSigner,
   recover,
   encodeSignature,

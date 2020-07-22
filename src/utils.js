@@ -3,6 +3,24 @@ const numberToBN = require('number-to-bn');
 const keccak256 = require('./hash').keccak256;
 const Buffer = require('safe-buffer').Buffer;
 
+
+const stringToHex = (str) => {
+    var val = "0x";
+    for (var i = 0; i < str.length; i++) {
+        if (val == "") { val = str.charCodeAt(i).toString(16); } else { val += str.charCodeAt(i).toString(16); }
+    }
+    return val;
+}
+
+const hexToString = (str) => {
+    let s = str.indexOf("0x") == 0 ? str.slice(2) : str;
+    let val = '';
+    for(let i = 0; i < s.length; i += 2) {
+        val += String.fromCharCode(+parseInt(s.slice(i, 2), 16).toString(10))
+    }
+    return val;
+}
+
 function stripZeros(aInput) {
     var a = aInput; // eslint-disable-line
     var first = a[0]; // eslint-disable-line
@@ -356,6 +374,8 @@ function getParamCoder(typeInput) {
 
 module.exports = {
     BN,
+    stringToHex,
+    hexToString,
     bnToBuffer,
     isHexString,
     hexOrBuffer,

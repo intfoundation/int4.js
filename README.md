@@ -1,5 +1,5 @@
 # int4.js - INT Chain 4.0 JavaScript API
-[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url] ![GitHub top language][language-url] ![Size][size-url] ![Nodejs Package][package-url]
+[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url] ![GitHub top language][language-image] ![Size][size-image] ![Nodejs Package][package-image]
 
 ## Installation
 
@@ -240,10 +240,10 @@ SOFTWARE.
 [coveralls-url]: https://img.shields.io/coveralls/github/intfoundation/int4.js
 
 [license-image]: https://img.shields.io/github/license/intfoundation/int4.js
-[license-url]: https://npmjs.org/package/int4.js/lincese
+[license-url]: https://github.com/intfoundation/int4.js/lincese
 
-[language-url]: https://img.shields.io/github/languages/top/intfoundation/int4.js?color=yellow
+[language-image]: https://img.shields.io/github/languages/top/intfoundation/int4.js?color=yellow
 
-[size-url]: https://img.shields.io/github/repo-size/intfoundation/int4.js?color=light
+[size-image]: https://img.shields.io/github/repo-size/intfoundation/int4.js?color=light
 
-[package-url]: https://github.com/intfoundation/int4.js/workflows/nodejs%20package/badge.svg
+[package-image]: https://github.com/intfoundation/int4.js/workflows/nodejs%20package/badge.svg

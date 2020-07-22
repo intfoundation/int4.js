@@ -1,5 +1,5 @@
 # int4.js - INT Chain 4.0 JavaScript API
-[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Build Status][actions-image]][actions-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url]
+[![NPM Package Version][npm-image-version]][npm-url] [![NPM Package Downloads][npm-image-downloads]][npm-url] [![Coverage Status][coveralls-image]][coveralls-url] [![License][license-image]][license-url]
 
 ## Installation
 

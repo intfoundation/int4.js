@@ -5,6 +5,7 @@ const Keystore = require('../src/keystore');
 const Transaction = require('../src/transaction');
 const RPC = require('../src/rpc');
 const Abi = require('../src/abi');
+const Utils = require('../src/utils');
 
 const testAccount = {
     address: 'INT3Pkr1zMmk3mnFzihH5F4kNxFavJo4',
@@ -89,7 +90,7 @@ describe("Transaction", () => {
                     nonce: Nat.fromString("0"),
                     gasPrice: Nat.fromString("10000000000"),
                     gas: Nat.fromString("30000"),
-                    to: Account.stringToHex(testAccount.address),
+                    to: Utils.stringToHex(testAccount.address),
                     value: Nat.fromString("0"),
                     data: "0x"
                 },
@@ -113,7 +114,7 @@ describe("Transaction", () => {
                 nonce: Nat.fromString(nonce),
                 gasPrice: Nat.fromString("10000000000"),
                 gas: Nat.fromString("30000"),
-                to: Account.stringToHex(testAccount.address),
+                to: Utils.stringToHex(testAccount.address),
                 value: Nat.fromString("0"),
                 data: "0x"
             };
@@ -129,9 +130,9 @@ describe("Transaction", () => {
             let url = "http://129.226.134.100:8555/testnet";
             let send = RPC(url);
             let nonce = await send("int_getTransactionCount", [testAccount.address, "latest"]);
-            console.log(nonce);
+            // console.log(nonce);
             let addressSign = await send("int_signAddress", [testAccount.address,testValidator.consPrivKey]);
-            console.log(addressSign);
+            // console.log(addressSign);
 
             let inputs = RegisterABI.inputs;
             let types = [];
@@ -153,7 +154,7 @@ describe("Transaction", () => {
                 nonce: Nat.fromString(nonce),
                 gasPrice: Nat.fromString("10000000000"),
                 gas: Nat.fromString("50000"),
-                to: Account.stringToHex(InterContractAddr),
+                to: Utils.stringToHex(InterContractAddr),
                 value: Nat.fromString(Nat.fromINT(10000)),
                 data: data
             };
@@ -165,10 +166,3 @@ describe("Transaction", () => {
     })
 
 });
-
-// process.nextTick(async () => {
-//     let url = "http://129.226.134.100:8555/testnet";
-//     let send = RPC(url);
-//     let hash = await send("int_sendRawTransaction", ["0xf870018502540be400827530a0494e5433506b72317a4d6d6b336d6e467a6968483546346b4e784661764a6f34808028a093c04d11468d104af25eb9e65bf93f888b663118a49209a1d891e47a78d184c6a0194bf7c072712f43d5915142b3f95f6eabc4f43f2a994ef781146db9e840b53a"]);
-//     console.log(hash);
-// });

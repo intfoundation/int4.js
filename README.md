@@ -38,6 +38,7 @@ console.log(int4);
 
 
 
+const Account = int4.account;
 const RPC = int4.rpc;
 const Nat = int4.nat;
 const Transaction = int4.transaction;
@@ -78,7 +79,7 @@ const RegisterABI = {
 };
 
  // Create Account
-let account = int4.account.create();
+let account = Account.create();
 console.log(account)
 { 
   address: 'INT3NFz9R4wY4VUMbWaLbdH4tPJHAmrn',
@@ -108,7 +109,7 @@ console.log(v3Keystore);
      mac:
       '09d9bd8bbb990892c38b006e71faa27a3d6f3a3c02371555f0b9b39c78b091a2' } }
 
-// Recover Account
+// Recover Account from PrivateKey or Keystore
 
 const keystore = {
     password: '123456789',
@@ -116,9 +117,10 @@ const keystore = {
     privateKey: '0xea03153d519677c7a355d95d3308ecc6b863d686f0d80192e5ee74984f5bc5ac',
     json: {"version":3,"id":"fc64a970-117a-4507-925b-4107b761d361","address":"INT3CTuDn49ET2dgMWBRauQMnnQECZy9","crypto":{"ciphertext":"f6bde26131cf6c26a87c3bfdfeae8426b564e7263a1238e2bdce9da36c7fdc20","cipherparams":{"iv":"75df1a41193930a895721c0f077b2be7"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"dd8233d31da738ee24a4c9926bfe8f67971dc8780fda8809c02713533414ed15","n":8192,"r":8,"p":1},"mac":"735c0d711f712dbcaea783bf94b108a5ef681657a340f7f662fa6925e2defcb6"}}
 };
-    
+
+let fromPrivAccount = Account.fromPrivate(keystore.privateKey); 
 let fromKeystoreAccount = Keystore.fromV3Keystore(keystore.json, keystore.password);   
-console.log(fromKeystoreAccount);
+console.log(fromPrivAccount/fromKeystoreAccount);
 
 { address: 'INT3CTuDn49ET2dgMWBRauQMnnQECZy9',
   privateKey: '0xea03153d519677c7a355d95d3308ecc6b863d686f0d80192e5ee74984f5bc5ac' 

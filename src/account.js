@@ -18,7 +18,7 @@ const create = entropy => {
 }
 
 const fromPrivate = privateKey => {
-  const buffer = new Buffer(privateKey.slice(2), "hex");
+  const buffer = Buffer.from(privateKey.slice(2), "hex");
   const ecKey = secp256k1.keyFromPrivate(buffer);
   const pubKey = ecKey.getPublic(false, 'hex');
   // NOTE: hash160 params is buffer
@@ -78,8 +78,8 @@ const decodeSignature = (hex) => [
 
 const makeSigner = addToV => (hash, privateKey) => {
   const signature = secp256k1
-    .keyFromPrivate(new Buffer(privateKey.slice(2), "hex"))
-    .sign(new Buffer(hash.slice(2), "hex"), {canonical: true});
+    .keyFromPrivate(Buffer.from(privateKey.slice(2), "hex"))
+    .sign(Buffer.from(hash.slice(2), "hex"), {canonical: true});
   return encodeSignature([
     Nat.fromString(Bytes.fromNumber(addToV + signature.recoveryParam)),
     Bytes.pad(32, Bytes.fromNat("0x" + signature.r.toString(16))),

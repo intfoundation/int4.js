@@ -14,11 +14,11 @@ const fromString = str => {
   return bn === "0x0" ? "0x" : bn;
 }
 
-const toEther = wei =>
+const toINT = wei =>
   toNumber(div(wei, fromString("10000000000"))) / 100000000;
 
-const fromEther = eth =>
-  mul(fromNumber(Math.floor(eth * 100000000)), fromString("10000000000"));
+const fromINT = int =>
+  mul(fromNumber(Math.floor(int * 100000000)), fromString("10000000000"));
 
 const toString = a =>
   toBN(a).toString(10);
@@ -47,8 +47,8 @@ module.exports = {
   fromString,
   toNumber,
   fromNumber,
-  toEther,
-  fromEther,
+  toINT,
+  fromINT,
   toUint256,
   add,
   mul,

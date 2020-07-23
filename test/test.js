@@ -62,13 +62,42 @@ describe("Account", () => {
             Assert(testAccount.address === recoverAddr)
         })
     })
+
+    describe("#isValidAddress()", () => {
+        it("Must match verification result", () => {
+            let addressList = [
+                { address: "INT3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: true  },
+                { address: "INT3Pkr1zMmk3mnFzihH5F4kNxFavJo",  valid: false },
+                { address: "INT4Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "iNT3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "InT3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "INt3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "int3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "Int3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "iNt3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "inT3Pkr1zMmk3mnFzihH5F4kNxFavJo4", valid: false },
+                { address: "INT", valid: false   },
+                { address: "INT3", valid: false  },
+                { address: "INT3Pkr1zMmk3mnFzihH5F4kNxFavJo0", valid: false },
+                { address: "INT3Pkr1zMmk3mnFzihH5F4kNxFavJoO", valid: false },
+                { address: "INT3Pkr1zMmk3mnFzihH5F4kNxFavJoI", valid: false },
+                { address: "INT3Pkr1zMmk3mnFzihH5F4kNxFavJol", valid: false },
+                { address: "INT3FFFFFFFFFFFFFFFFFFFFFFFFFFFF", valid: true },
+                { address: "INT3AAAAAAAAAAAAAAAAAAAAAAAAAAAA", valid: true },
+            ];
+
+            for (let address of addressList) {
+                let isValid = Account.isValidAddress(address.address);
+                Assert(address.valid === isValid)
+            }
+        })
+    })
 });
 
 describe("Keystore", () => {
    describe("#toV3Keystore", () => {
        it("Must generate v3 keystore", () => {
            let v3Keystore = Keystore.toV3Keystore(keystore.privateKey, keystore.password, {});
-           console.log(Keystore.toV3Keystore(keystore.privateKey, keystore.password, {}));
            Assert(v3Keystore.version === 3);
        })
    });

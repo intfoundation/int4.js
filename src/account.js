@@ -7,9 +7,10 @@ const Crypto = require("./crypto");
 const Base58Check = require("bs58check");
 const Buffer = require('safe-buffer').Buffer;
 
-
+const ALPHABET = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 const Version = 0x05;
 const INTAddrPrefix = "INT";
+
 const create = entropy => {
   const innerHex = keccak256(Bytes.concat(Bytes.random(32), entropy || Bytes.random(32)));
   const middleHex = Bytes.concat(Bytes.concat(Bytes.random(32), innerHex), Bytes.random(32));
@@ -39,6 +40,13 @@ const isValidAddress = address => {
   }else if (address.substr(0, 4) != "INT3") {
     return false
   }
+
+  for (let i = 3; i < address.length; i++) {
+     if (ALPHABET.indexOf(address[i]) === -1) {
+         return false
+     }
+  }
+
   return true
 }
 

@@ -246,4 +246,4 @@ SOFTWARE.
 
 [size-image]: https://img.shields.io/github/repo-size/intfoundation/int4.js?color=light
 
-[package-image]: https://github.com/intfoundation/int4.js/workflows/nodejs%20package/badge.svg
+[package-image]: https://github.com/intfoundation/int4.js/workflows/Node.js%20Package/badge.svg

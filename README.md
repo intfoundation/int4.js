@@ -230,7 +230,7 @@ SOFTWARE.
 ```
 
 [npm-image-version]: https://img.shields.io/npm/v/int4.js.svg
-[npm-image-downloads]: https://img.shields.io/npm/dm/int4.js.svg?color=pink
+[npm-image-downloads]: https://img.shields.io/npm/dm/int4.js.svg?color=purple
 [npm-url]: https://npmjs.org/package/int4.js
 
 [actions-image]: https://github.com/intfoundation/int4.js/workflows/Build/badge.svg

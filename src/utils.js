@@ -16,7 +16,7 @@ const hexToString = (str) => {
     let s = str.indexOf("0x") == 0 ? str.slice(2) : str;
     let val = '';
     for(let i = 0; i < s.length; i += 2) {
-        val += String.fromCharCode(+parseInt(s.slice(i, 2), 16).toString(10))
+        val += String.fromCharCode(+parseInt(s.substr(i, 2), 16).toString(10))
     }
     return val;
 }

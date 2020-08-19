@@ -2,6 +2,18 @@ const BN = require('bn.js');
 const numberToBN = require('number-to-bn');
 const keccak256 = require('./hash').keccak256;
 const Buffer = require('safe-buffer').Buffer;
+const _ = require('underscore');
+
+/**
+ * Returns true if object is BN, otherwise false
+ *
+ * @method isBN
+ * @param {Object} object
+ * @return {Boolean}
+ */
+var isBN = function (object) {
+    return BN.isBN(object);
+};
 
 
 const stringToHex = (str) => {
@@ -372,8 +384,161 @@ function getParamCoder(typeInput) {
     return coder;
 }
 
+
+
+const zero = new BN(0);
+const negative1 = new BN(-1);
+
+const unitMap = {
+    'wei':          '1', // eslint-disable-line
+    'int':        '1000000000000000000', // eslint-disable-line
+};
+
+/**
+ * Returns value of unit in Wei
+ *
+ * @method getValueOfUnit
+ * @param {String} unit the unit to convert to, default int
+ * @returns {BigNumber} value of the unit (in Wei)
+ * @throws error if the unit is not correct:w
+ */
+function getValueOfUnit(unitInput) {
+    const unit = unitInput ? unitInput.toLowerCase() : 'int';
+    var unitValue = unitMap[unit]; // eslint-disable-line
+
+    if (typeof unitValue !== 'string') {
+        throw new Error(`[intjs-unit] the unit provided ${unitInput} doesn't exists, please use the one of the following units ${JSON.stringify(unitMap, null, 2)}`);
+    }
+
+    return new BN(unitValue, 10);
+}
+
+function numberToString(arg) {
+    if (typeof arg === 'string') {
+        if (!arg.match(/^-?[0-9.]+$/)) {
+            throw new Error(`while converting number to string, invalid number value '${arg}', should be a number matching (^-?[0-9.]+).`);
+        }
+        return arg;
+    } else if (typeof arg === 'number') {
+        return String(arg);
+    } else if (typeof arg === 'object' && arg.toString && (arg.toTwos || arg.dividedToIntegerBy)) {
+        if (arg.toPrecision) {
+            return String(arg.toPrecision());
+        } else { // eslint-disable-line
+            return arg.toString(10);
+        }
+    }
+    throw new Error(`while converting number to string, invalid number value '${arg}' type ${typeof arg}.`);
+}
+
+function fromWei(weiInput, unit, optionsInput) {
+    var wei = numberToBN(weiInput); // eslint-disable-line
+    var negative = wei.lt(zero); // eslint-disable-line
+    const base = getValueOfUnit(unit);
+    const baseLength = unitMap[unit].length - 1 || 1;
+    const options = optionsInput || {};
+
+    if (negative) {
+        wei = wei.mul(negative1);
+    }
+
+    var fraction = wei.mod(base).toString(10); // eslint-disable-line
+
+    while (fraction.length < baseLength) {
+        fraction = `0${fraction}`;
+    }
+
+    if (!options.pad) {
+        fraction = fraction.match(/^([0-9]*[1-9]|0)(0*)/)[1];
+    }
+
+    var whole = wei.div(base).toString(10); // eslint-disable-line
+
+    if (options.commify) {
+        whole = whole.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    var value = `${whole}${fraction == '0' ? '' : `.${fraction}`}`; // eslint-disable-line
+
+    if (negative) {
+        value = `-${value}`;
+    }
+
+    return value;
+}
+
+function toWei(intInput, unit) {
+    var int = numberToString(intInput); // eslint-disable-line
+    const base = getValueOfUnit(unit);
+    const baseLength = unitMap[unit].length - 1 || 1;
+
+    // Is it negative?
+    var negative = (int.substring(0, 1) === '-'); // eslint-disable-line
+    if (negative) {
+        int = int.substring(1);
+    }
+
+    if (int === '.') { throw new Error(`[intjs-unit] while converting number ${intInput} to wei, invalid value`); }
+
+    // Split it into a whole and fractional part
+    var comps = int.split('.'); // eslint-disable-line
+    if (comps.length > 2) { throw new Error(`[intjs-unit] while converting number ${intInput} to wei,  too many decimal points`); }
+
+    var whole = comps[0], fraction = comps[1]; // eslint-disable-line
+
+    if (!whole) { whole = '0'; }
+    if (!fraction) { fraction = '0'; }
+    if (fraction.length > baseLength) { throw new Error(`[intjs-unit] while converting number ${intInput} to wei, too many decimal places`); }
+
+    while (fraction.length < baseLength) {
+        fraction += '0';
+    }
+
+    whole = new BN(whole);
+    fraction = new BN(fraction);
+    var wei = (whole.mul(base)).add(fraction); // eslint-disable-line
+
+    if (negative) {
+        wei = wei.mul(negative1);
+    }
+
+    return new BN(wei.toString(10), 10);
+}
+
+/**
+ *
+ * @method fromWei
+ * @param {Number|String} number can be a number, number string or a HEX of a decimal
+ * @return {String|Object} When given a BN object it returns one as well, otherwise a number
+ */
+var fromINT = function(number) {
+    if(!isBN(number) && !_.isString(number)) {
+        throw new Error('Please pass numbers as strings or BN objects to avoid precision errors.');
+    }
+
+    return isBN(number) ? fromWei(number, "int") : fromWei(number, "int").toString(10);
+};
+
+/**
+ *
+ * @method toINT
+ * @param {Number|String|BN} number can be a number, number string or a HEX of a decimal
+ * @return {String|Object} When given a BN object it returns one as well, otherwise a number
+ */
+var toINT = function(number) {
+    if(!isBN(number) && !_.isString(number)) {
+        throw new Error('Please pass numbers as strings or BN objects to avoid precision errors.');
+    }
+
+    return isBN(number) ? toWei(number, 'wei') : toWei(number, 'wei').toString(10);
+};
+
+
 module.exports = {
     BN,
+    isBN,
+    fromINT,
+    toINT,
     stringToHex,
     hexToString,
     bnToBuffer,

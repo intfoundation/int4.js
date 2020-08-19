@@ -196,3 +196,12 @@ describe("Transaction", () => {
     })
 
 });
+
+
+describe("Nat", () => {
+    describe("#fromINT()", () => {
+        let amount = '8';
+        let a = Utils.fromINT(amount);
+        console.log(a);
+    })
+});

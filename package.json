@@ -35,6 +35,7 @@
     "randombytes": "^2.1.0",
     "safe-buffer": "^5.2.1",
     "scrypt.js": "^0.3.0",
+    "underscore": "^1.10.2",
     "uuid": "^8.2.0",
     "xhr-request-promise": "^0.1.3"
   },

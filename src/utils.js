@@ -516,7 +516,7 @@ var fromINT = function(number) {
         throw new Error('Please pass numbers as strings or BN objects to avoid precision errors.');
     }
 
-    return isBN(number) ? fromWei(number, "int") : fromWei(number, "int").toString(10);
+    return isBN(number) ? toWei(number, "int") : toWei(number, "int").toString(10);
 };
 
 /**
@@ -530,7 +530,7 @@ var toINT = function(number) {
         throw new Error('Please pass numbers as strings or BN objects to avoid precision errors.');
     }
 
-    return isBN(number) ? toWei(number, 'wei') : toWei(number, 'wei').toString(10);
+    return isBN(number) ? fromWei(number, 'int') : fromWei(number, 'int').toString(10);
 };
 
 

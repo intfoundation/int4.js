@@ -185,7 +185,7 @@ describe("Transaction", () => {
                 gasPrice: Nat.fromString("10000000000"),
                 gas: Nat.fromString("50000"),
                 to: Utils.stringToHex(InterContractAddr),
-                value: Nat.fromString(Nat.fromINT(10000)),
+                value: Nat.fromString(Utils.fromINT(10000)),
                 data: data
             };
 
@@ -202,6 +202,8 @@ describe("Nat", () => {
     describe("#fromINT()", () => {
         let amount = '8';
         let a = Utils.fromINT(amount);
+        let b = Utils.toINT(amount);
         console.log(a);
+        console.log(b);
     })
 });

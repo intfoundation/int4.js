@@ -185,11 +185,11 @@ describe("Transaction", () => {
                 gasPrice: Nat.fromString("10000000000"),
                 gas: Nat.fromString("50000"),
                 to: Utils.stringToHex(InterContractAddr),
-                value: Nat.fromString(Utils.fromINT(10000)),
+                value: Nat.fromString(Utils.fromINT('10000')),
                 data: data
             };
 
-            let signature = Transaction.sign(tx, testAccount);
+            // let signature = Transaction.sign(tx, testAccount);
             // let hash = await send("int_sendRawTransaction", [signature]);
             // Assert(hash !== "")
         })

@@ -137,7 +137,7 @@ let tx = {
     gasPrice: Nat.fromString("10000000000"),
     gas: Nat.fromString("30000"),
     to: Utils.stringToHex(testAccount.address),
-    value: Nat.fromString(Utils.fromINT(0)),
+    value: Nat.fromString(Utils.fromINT('0')),
     data: "0x"
 };
 
@@ -172,7 +172,7 @@ let tx = {
     gasPrice: Nat.fromString("10000000000"),
     gas: Nat.fromString("50000"),
     to: Utils.stringToHex(InterContractAddr),
-    value: Nat.fromString(Utils.fromINT(10000)),
+    value: Nat.fromString(Utils.fromINT('10000')),
     data: data
 };
 

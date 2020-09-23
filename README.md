@@ -17,6 +17,8 @@ yarn add int4.js
 
 ## Usage
 
+
+### int4
 ```js
 const int4 = require('int4.js');
 console.log(int4);
@@ -35,8 +37,10 @@ console.log(int4);
     keystore:{},
     utils:{}
 }
+```
 
-
+### const
+```js
 const Account = int4.account;
 const RPC = int4.rpc;
 const Nat = int4.nat;
@@ -77,15 +81,22 @@ const RegisterABI = {
         ]
 };
 
- // Create Account
+```
+
+### Create Account
+ 
+ ```js
 let account = Account.create();
 console.log(account)
 { 
   address: 'INT3NFz9R4wY4VUMbWaLbdH4tPJHAmrn',
   privateKey: '0x353d3eab4643ab04972eaa80e4b3383266fea8cfd743605c62dd0fb07768ba7a' 
 }
+```
 
-// Create Keystore
+### Create Keystore
+
+```js
 let v3Keystore = Keystore.toV3Keystore(keystore.privateKey, keystore.password, {});
 console.log(v3Keystore);
 
@@ -107,8 +118,11 @@ console.log(v3Keystore);
         p: 1 },
      mac:
       '09d9bd8bbb990892c38b006e71faa27a3d6f3a3c02371555f0b9b39c78b091a2' } }
+```
 
-// Recover Account from PrivateKey or Keystore
+### Recover Account from PrivateKey or Keystore
+
+```js
 
 const keystore = {
     password: '123456789',
@@ -124,10 +138,12 @@ console.log(fromPrivAccount/fromKeystoreAccount);
 { address: 'INT3CTuDn49ET2dgMWBRauQMnnQECZy9',
   privateKey: '0xea03153d519677c7a355d95d3308ecc6b863d686f0d80192e5ee74984f5bc5ac' 
 }
+```
 
- // SendRawTransaction
- // The javascript code should be inside the async function.
+### SendRawTransaction
+* The javascript code should be inside the async function.
 
+```js
 let url = "http://129.226.134.100:8555/testnet";
 let send = RPC(url);
 let nonce = await send("int_getTransactionCount", [testAccount.address, "latest"]);
@@ -144,11 +160,13 @@ let tx = {
 let signature = Transaction.sign(tx, testAccount);
 let hash = await send("int_sendRawTransaction", [signature]);
 console.log(hash);
+```
 
 
- // Register Transaction
- // The javascript code should be inside the async function.
- 
+### Register Transaction
+* The javascript code should be inside the async function.
+
+```js
 let url = "http://129.226.134.100:8555/testnet";
 let send = RPC(url);
 let nonce = await send("int_getTransactionCount", [testAccount.address, "latest"]);

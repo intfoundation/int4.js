@@ -1,6 +1,6 @@
 {
   "name": "int4.js",
-  "version": "4.0.11",
+  "version": "4.0.12",
   "description": "INT Chain 4.0 JavaScript API",
   "main": "src/index.js",
   "scripts": {

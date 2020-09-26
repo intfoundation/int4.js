@@ -183,25 +183,25 @@ function coderFixedBytes(length) {
 
 const coderAddress = {
     encode: function encodeAddress(valueInput) {
-        var value = valueInput; // eslint-disable-line
+        var value = stringToHex(valueInput); // eslint-disable-line
         var result = Buffer.alloc(32); // eslint-disable-line
-        if (!isHexString(value, 20)) { throw new Error('[intjs-abi] while encoding address, invalid address value, not alphanumeric 20 byte hex string'); }
+        if (!isHexString(value, 32)) { throw new Error('[intjs-abi] while encoding address, invalid address value, not alphanumeric 32 byte hex string'); }
         value = hexOrBuffer(value);
         result.fill(0);
-        value.copy(result, 12);
+        value.copy(result, 0);
         return result;
     },
     decode: function decodeAddress(data, offset) {
         if (data.length === 0) {
             return {
                 consumed: 32,
-                value: '0x',
+                value: '',
             };
         }
         if (data.length !== 0 && data.length < offset + 32) { throw new Error(`[intjs-abi] while decoding address data, invalid address data, invalid byte length ${data.length}`); }
         return {
             consumed: 32,
-            value: `0x${data.slice(offset + 12, offset + 32).toString('hex')}`,
+            value: hexToString(`${data.slice(offset + 0, offset + 32).toString('hex')}`),
         };
     },
 };

@@ -19,9 +19,30 @@ const signingData = tx => {
   ]);
 };
 
+const signingCallData = tx => {
+  return RLP.encode([
+    // Bytes.fromNat(tx.nonce),
+    Bytes.fromNat(tx.gasPrice),
+    Bytes.fromNat(tx.gas),
+    tx.to ? Bytes.fromNat(tx.to) : "0x",
+    Bytes.fromNat(tx.value),
+    tx.data,
+    Bytes.fromNat(tx.chainId || "0x1"),
+    "0x",
+    "0x"
+  ]);
+};
+
 // Transaction, Account -> Bytes
 const sign = (tx, account) => {
   const data = signingData(tx);
+  const signature = Account.makeSigner(Nat.toNumber(tx.chainId || "0x1") * 2 + 35)(keccak256(data), account.privateKey);
+  const rawTransaction = RLP.decode(data).slice(0,6).concat(Account.decodeSignature(signature));
+  return RLP.encode(rawTransaction);
+};
+
+const signCall = (tx, account) => {
+  const data = signingCallData(tx);
   const signature = Account.makeSigner(Nat.toNumber(tx.chainId || "0x1") * 2 + 35)(keccak256(data), account.privateKey);
   const rawTransaction = RLP.decode(data).slice(0,6).concat(Account.decodeSignature(signature));
   return RLP.encode(rawTransaction);
@@ -40,5 +61,6 @@ const recover = (rawTransaction) => {
 
 module.exports = {
   sign,
+  signCall,
   recover
 };

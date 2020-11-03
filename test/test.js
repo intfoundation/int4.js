@@ -58,8 +58,8 @@ describe("Account", () => {
 
     describe("#fromPrivateKey()", () => {
         it("Must recover the same address", () => {
-            let recoverAddr = Account.fromPrivate(testAccount.privateKey).address;
-            Assert(testAccount.address === recoverAddr)
+            let recoverAddr = Account.fromPrivate(keystore.privateKey).address;
+            Assert(keystore.address === recoverAddr)
         })
     })
 

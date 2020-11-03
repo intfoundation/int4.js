@@ -28,7 +28,8 @@ const fromPrivate = privateKey => {
   address = INTAddrPrefix + address.substr(0, 29);
   return {
     address: address,
-    privateKey: privateKey
+    privateKey: privateKey,
+    publicKey: pubKey
   }
 }
 

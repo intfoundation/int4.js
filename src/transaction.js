@@ -4,6 +4,45 @@ const Bytes = require("./bytes");
 const RLP = require("./rlp");
 const keccak256 = require("./hash").keccak256;
 
+// EthereumRPC, IncompleteTransaction -> Promise Transaction
+const addDefaults = (rpc, tx) => {
+  var baseDefaults = [
+    tx.chainId || rpc("net_version", []),
+    tx.gasPrice || rpc("int_gasPrice", []),
+    tx.nonce || rpc("int_getTransactionCount", [tx.from,"latest"]),
+    tx.value || "0x0",
+    tx.data || "0x"
+  ];
+  const noAddress = address => !address || address === "" || address === "0x";
+  return Promise.all(baseDefaults).then(([chainIdNum, gasPrice, nonce, value, data]) => {
+    var chainId = Nat.fromNumber(chainIdNum);
+    var gasEstimator = tx.gas
+        ? Promise.resolve(null)
+        : rpc("int_estimateGas", [{
+          from: noAddress(tx.from) ? null : tx.from,
+          to: noAddress(tx.to) ? null : tx.to,
+          value: tx.value,
+          nonce: tx.nonce,
+          data: tx.data
+        }]);
+    return gasEstimator.then(gasEstimate => {
+      if (gasEstimate.error) {
+        throw gasEstimate.error;
+      }
+      return {
+        chainId: chainId,
+        from: noAddress(tx.from) ? "0x" : tx.from.toLowerCase(),
+        to: noAddress(tx.to) ? "0x" : tx.to.toLowerCase(),
+        gasPrice: gasPrice,
+        gas: tx.gas ? tx.gas : Nat.div(Nat.mul(gasEstimate, "0x6"), "0x5"),
+        nonce: nonce,
+        value: value,
+        data: data ? data.toLowerCase() : null
+      }
+    });
+  });
+};
+
 // Transaction -> Bytes
 const signingData = tx => {
   return RLP.encode([
@@ -60,6 +99,7 @@ const recover = (rawTransaction) => {
 };
 
 module.exports = {
+  addDefaults,
   sign,
   signCall,
   recover

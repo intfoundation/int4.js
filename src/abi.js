@@ -1,13 +1,6 @@
 const Buffer = require('safe-buffer').Buffer;
 const utils = require('./utils');
 const uint256Coder = utils.uint256Coder;
-const coderBoolean = utils.coderBoolean;
-const coderFixedBytes = utils.coderFixedBytes;
-const coderAddress = utils.coderAddress;
-const coderDynamicBytes = utils.coderDynamicBytes;
-const coderString = utils.coderString;
-const coderArray = utils.coderArray;
-const paramTypePart = utils.paramTypePart;
 const getParamCoder = utils.getParamCoder;
 
 function Result() {}

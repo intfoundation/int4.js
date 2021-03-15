@@ -1,5 +1,6 @@
 module.exports = {
   account: require("./account.js"),
+  nat: require("./nat.js"),
   bytes: require("./bytes.js"),
   hash: require("./hash.js"),
   rlp: require("./rlp.js"),

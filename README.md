@@ -50,16 +50,16 @@ const Abi = int4.abi;
 const Keystore = int4.keystore;
 
 const testAccount = {
-    address: 'INT3NFz9R4wY4VUMbWaLbdH4tPJHAmrn',
+    address: '0x8dBC29f4d2b9C822903d437d12f7db048dF69a60',
     privateKey: '0x353d3eab4643ab04972eaa80e4b3383266fea8cfd743605c62dd0fb07768ba7a'
 };
 const testValidator = {
-    address:     "INT3NFz9R4wY4VUMbWaLbdH4tPJHAmrn",
+    address:     "0x8dBC29f4d2b9C822903d437d12f7db048dF69a60",
     consPrivKey: "0x56F2EBBF7EAA3FB044A9D7EA070D2A205E6AF091E1EDA0C95B0AB2BE39D9B4E9",
     consPubKey:  "0x0684EF4E9B6F47A0EB5430B427CB00687FBD301B695101EDB0DCC69CDDB3635239DF0B4D471F6B7F43077EA614492EC2438707FE26A8D9E64D463ACDFE806D0375B4DE3D43BC57FF2F31FA14D9A4B81E40A572E2ACD9742ED43C09A328487229678195B7F90D14A6D8493E750347C339508C8480F712369D919F747014E15C21",
 };
 
-const InterContractAddr = "INT3FFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+const InterContractAddr = "0x0000000000000000000000000000000000000000";
 
 const RegisterABI = {
         "type": "function",
@@ -89,7 +89,7 @@ const RegisterABI = {
 let account = Account.create();
 console.log(account)
 { 
-  address: 'INT3NFz9R4wY4VUMbWaLbdH4tPJHAmrn',
+  address: '0x8dBC29f4d2b9C822903d437d12f7db048dF69a60',
   privateKey: '0x353d3eab4643ab04972eaa80e4b3383266fea8cfd743605c62dd0fb07768ba7a' 
 }
 ```
@@ -102,7 +102,7 @@ console.log(v3Keystore);
 
 { version: 3,
   id: 'b596552f-ccd6-442c-9411-097f392a8796',
-  address: 'INT3CTuDn49ET2dgMWBRauQMnnQECZy9',
+  address: '0x6bE686f9C4f5a3921ad989397195ECbc335D933e',
   crypto:
    { ciphertext:
       '9787b80d9eb516b6281dc3d5d108d24aadc21a85db8f4ea8fa7df1fd92d83122',
@@ -126,16 +126,16 @@ console.log(v3Keystore);
 
 const keystore = {
     password: '123456789',
-    address: 'INT3CTuDn49ET2dgMWBRauQMnnQECZy9',
+    address: '0x6bE686f9C4f5a3921ad989397195ECbc335D933e',
     privateKey: '0xea03153d519677c7a355d95d3308ecc6b863d686f0d80192e5ee74984f5bc5ac',
-    json: {"version":3,"id":"fc64a970-117a-4507-925b-4107b761d361","address":"INT3CTuDn49ET2dgMWBRauQMnnQECZy9","crypto":{"ciphertext":"f6bde26131cf6c26a87c3bfdfeae8426b564e7263a1238e2bdce9da36c7fdc20","cipherparams":{"iv":"75df1a41193930a895721c0f077b2be7"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"dd8233d31da738ee24a4c9926bfe8f67971dc8780fda8809c02713533414ed15","n":8192,"r":8,"p":1},"mac":"735c0d711f712dbcaea783bf94b108a5ef681657a340f7f662fa6925e2defcb6"}}
+    json: {"version":3,"id":"fc64a970-117a-4507-925b-4107b761d361","address":"0x6bE686f9C4f5a3921ad989397195ECbc335D933e","crypto":{"ciphertext":"f6bde26131cf6c26a87c3bfdfeae8426b564e7263a1238e2bdce9da36c7fdc20","cipherparams":{"iv":"75df1a41193930a895721c0f077b2be7"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"dd8233d31da738ee24a4c9926bfe8f67971dc8780fda8809c02713533414ed15","n":8192,"r":8,"p":1},"mac":"735c0d711f712dbcaea783bf94b108a5ef681657a340f7f662fa6925e2defcb6"}}
 };
 
 let fromPrivAccount = Account.fromPrivate(keystore.privateKey); 
 let fromKeystoreAccount = Keystore.fromV3Keystore(keystore.json, keystore.password);   
 console.log(fromPrivAccount/fromKeystoreAccount);
 
-{ address: 'INT3CTuDn49ET2dgMWBRauQMnnQECZy9',
+{ address: '0x6bE686f9C4f5a3921ad989397195ECbc335D933e',
   privateKey: '0xea03153d519677c7a355d95d3308ecc6b863d686f0d80192e5ee74984f5bc5ac' 
 }
 ```
@@ -144,7 +144,7 @@ console.log(fromPrivAccount/fromKeystoreAccount);
 * The javascript code should be inside the async function.
 
 ```js
-let url = "http://129.226.134.100:8555/testnet";
+let url = "http://127.0.0.1:8555";
 let send = RPC(url);
 let nonce = await send("int_getTransactionCount", [testAccount.address, "latest"]);
 let tx = {
@@ -152,7 +152,7 @@ let tx = {
     nonce: Nat.fromString(nonce),
     gasPrice: Nat.fromString("10000000000"),
     gas: Nat.fromString("30000"),
-    to: Utils.stringToHex(testAccount.address),
+    to: testAccount.address,
     value: Nat.fromString(Utils.fromINT('0')),
     data: "0x"
 };
@@ -167,7 +167,7 @@ console.log(hash);
 * The javascript code should be inside the async function.
 
 ```js
-let url = "http://129.226.134.100:8555/testnet";
+let url = "http://127.0.0.1:8555";
 let send = RPC(url);
 let nonce = await send("int_getTransactionCount", [testAccount.address, "latest"]);
 let addressSign = await send("int_signAddress", [testAccount.address,testValidator.consPrivKey]);
@@ -189,7 +189,7 @@ let tx = {
     nonce: Nat.fromString(nonce),
     gasPrice: Nat.fromString("10000000000"),
     gas: Nat.fromString("50000"),
-    to: Utils.stringToHex(InterContractAddr),
+    to: InterContractAddr,
     value: Nat.fromString(Utils.fromINT('10000')),
     data: data
 };
@@ -225,7 +225,7 @@ npm run test
 ```
 MIT License
 
-Copyright (c) 2020 INT Chain
+Copyright (c) 2021 INT Chain
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

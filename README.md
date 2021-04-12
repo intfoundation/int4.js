@@ -28,7 +28,7 @@ console.log(int4);
     nat:{},
     bytes:{},
     hash:{},
-    RLP:{},
+    rlp:{},
     abi:{},
     transaction:{},
     rpc:{},

@@ -10,5 +10,6 @@ module.exports = {
   desubits: require("./desubits.js"),
   passphrase: require("./passphrase.js"),
   keystore: require("./keystore.js"),
-  utils: require("./utils")
+  utils: require("./utils"),
+  formatters: require("./helpers")
 }

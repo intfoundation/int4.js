@@ -4,7 +4,7 @@ const Bytes = require("./bytes");
 const RLP = require("./rlp");
 const keccak256 = require("./hash").keccak256;
 
-// EthereumRPC, IncompleteTransaction -> Promise Transaction
+// INT Chain RPC, IncompleteTransaction -> Promise Transaction
 const addDefaults = (rpc, tx) => {
   var baseDefaults = [
     tx.chainId || rpc("net_version", []),

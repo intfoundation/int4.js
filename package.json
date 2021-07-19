@@ -1,6 +1,6 @@
 {
   "name": "int4.js",
-  "version": "4.0.20",
+  "version": "4.0.21",
   "description": "INT Chain 4.0 JavaScript API",
   "main": "src/index.js",
   "scripts": {
@@ -35,6 +35,7 @@
     "safe-buffer": "^5.2.1",
     "scrypt.js": "^0.3.0",
     "underscore": "^1.10.2",
+    "utf8": "^3.0.0",
     "uuid": "^8.2.0",
     "xhr-request-promise": "^0.1.3"
   },

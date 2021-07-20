@@ -59,7 +59,7 @@ const testValidator = {
     consPubKey:  "0x0684EF4E9B6F47A0EB5430B427CB00687FBD301B695101EDB0DCC69CDDB3635239DF0B4D471F6B7F43077EA614492EC2438707FE26A8D9E64D463ACDFE806D0375B4DE3D43BC57FF2F31FA14D9A4B81E40A572E2ACD9742ED43C09A328487229678195B7F90D14A6D8493E750347C339508C8480F712369D919F747014E15C21",
 };
 
-const InterContractAddr = "0x0000000000000000000000000000000000000000";
+const InterContractAddr = "0x0000000000000000000000000000000000001001";
 
 const RegisterABI = {
         "type": "function",
@@ -185,7 +185,7 @@ let encodeData = Abi.encodeParams(types, [testValidator.consPubKey, addressSign,
 let data = "0x" + methodId.slice(2) + encodeData.slice(2);
 
 let tx = {
-    chainId: Nat.fromString("2"),
+    chainId: Nat.fromString("2048"),
     nonce: Nat.fromString(nonce),
     gasPrice: Nat.fromString("10000000000"),
     gas: Nat.fromString("50000"),

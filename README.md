@@ -148,7 +148,7 @@ let url = "http://127.0.0.1:8555";
 let send = RPC(url);
 let nonce = await send("int_getTransactionCount", [testAccount.address, "latest"]);
 let tx = {
-    chainId: Nat.fromString("2"),  //  2 for testnet
+    chainId: Nat.fromString("2048"),  //  2048 for testnet
     nonce: Nat.fromString(nonce),
     gasPrice: Nat.fromString("10000000000"),
     gas: Nat.fromString("30000"),

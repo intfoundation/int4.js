@@ -150,7 +150,7 @@ let nonce = await send("int_getTransactionCount", [testAccount.address, "latest"
 let tx = {
     chainId: Nat.fromString("2048"),  //  2048 for testnet
     nonce: Nat.fromString(nonce),
-    gasPrice: Nat.fromString("10000000000"),
+    gasPrice: Nat.fromString("5000000000000"),
     gas: Nat.fromString("30000"),
     to: testAccount.address,
     value: Nat.fromString(Utils.fromINT('0')),
@@ -187,7 +187,7 @@ let data = "0x" + methodId.slice(2) + encodeData.slice(2);
 let tx = {
     chainId: Nat.fromString("2048"),
     nonce: Nat.fromString(nonce),
-    gasPrice: Nat.fromString("10000000000"),
+    gasPrice: Nat.fromString("5000000000000"),
     gas: Nat.fromString("50000"),
     to: InterContractAddr,
     value: Nat.fromString(Utils.fromINT('10000')),
